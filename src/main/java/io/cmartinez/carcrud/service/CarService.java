@@ -10,4 +10,14 @@ public class CarService {
   public List<Car> getAllCars(){
     return DataBaseCars.getAllCars();
   }
+
+  public Car findCarById(int id){
+    List<Car> cars = DataBaseCars.getAllCars();
+    for(Car car: cars){
+      if(car.getId() == id){
+        return car;
+      }
+    }
+    return null;
+  }
 }

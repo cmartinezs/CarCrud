@@ -6,5 +6,37 @@
 </head>
 <body>
 <h1>Servicio Rest para Autos</h1>
+<input id="load" type="button" value="Cargar autos">
+<table id="cars">
+    <tr>
+        <th>ID</th>
+        <th>Patente</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Color</th>
+    </tr>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#load").click(function(){
+            var url = "/cars"
+            $.get(url, function(json){
+                $.each(json.cars, function(index, element){
+                    var row = "<tr>" +
+                        "<td>" + element.id + "</td>" +
+                        "<td>" + element.plateCode + "</td>" +
+                        "<td>" + element.brand + "</td>" +
+                        "<td>" + element.model + "</td>" +
+                        "<td>" + element.color + "</td>" +
+                        "</tr>"
+                    $("#cars").append(row)
+                })
+            })
+        })
+    })
+</script>
 </body>
 </html>
