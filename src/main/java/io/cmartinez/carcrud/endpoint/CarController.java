@@ -4,6 +4,7 @@ import io.cmartinez.carcrud.repository.Car;
 import io.cmartinez.carcrud.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,18 @@ public class CarController {
     if(foundCar != null){
       GetCarResponse response = new GetCarResponse();
       response.setCar(foundCar);
+      return ResponseEntity.ok(response);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
+  @DeleteMapping("/cars/{id}")
+  public ResponseEntity<GetCarResponse> delete(@PathVariable int id){
+    Car deletedCar = carService.deleteCarById(id);
+    if(deletedCar != null){
+      GetCarResponse response = new GetCarResponse();
+      response.setCar(deletedCar);
       return ResponseEntity.ok(response);
     } else {
       return ResponseEntity.notFound().build();

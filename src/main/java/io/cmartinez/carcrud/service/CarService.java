@@ -20,4 +20,15 @@ public class CarService {
     }
     return null;
   }
+
+  public Car deleteCarById(int id) {
+    List<Car> cars = DataBaseCars.getAllCars();
+    for(Car car: cars){
+      if(car.getId() == id){
+        cars.remove(car);
+        return car;
+      }
+    }
+    return null;
+  }
 }
