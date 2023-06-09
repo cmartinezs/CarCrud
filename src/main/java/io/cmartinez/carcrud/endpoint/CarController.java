@@ -3,10 +3,13 @@ package io.cmartinez.carcrud.endpoint;
 import io.cmartinez.carcrud.repository.Car;
 import io.cmartinez.carcrud.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -43,6 +46,16 @@ public class CarController {
       return ResponseEntity.ok(response);
     } else {
       return ResponseEntity.notFound().build();
+    }
+  }
+
+  @PostMapping("/cars")
+  public ResponseEntity<GetCarResponse> post(@RequestBody Car aCar){
+    boolean added = carService.addCar(aCar);
+    if(added){
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    } else {
+      return ResponseEntity.badRequest().build();
     }
   }
 }

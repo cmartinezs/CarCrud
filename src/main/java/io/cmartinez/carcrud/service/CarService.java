@@ -31,4 +31,12 @@ public class CarService {
     }
     return null;
   }
+
+  public boolean addCar(Car aCar) {
+    List<Car> cars = DataBaseCars.getAllCars();
+    int id = cars.size() + 1;
+    aCar.setId(id);
+    cars.add(aCar);
+    return true;
+  }
 }
