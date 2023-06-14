@@ -27,7 +27,13 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
+        let urlParams = new URLSearchParams(window.location.search)
+        let id = urlParams.get("id")
 
+        let url = "/cars/" + id
+        $.get(url, function(json){
+            alert(JSON.stringify(json))
+        })
     })
 </script>
 </body>
