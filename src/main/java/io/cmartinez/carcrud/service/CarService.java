@@ -39,4 +39,18 @@ public class CarService {
     cars.add(aCar);
     return true;
   }
+
+  public Car updateCarById(int id, Car aCar) {
+    List<Car> cars = DataBaseCars.getAllCars();
+    for (Car car : cars) {
+      if (car.getId() == id) {
+        car.setBrand(aCar.getBrand());
+        car.setColor(aCar.getColor());
+        car.setModel(aCar.getModel());
+        car.setPlateCode(aCar.getPlateCode());
+        return car;
+      }
+    }
+    return null;
+  }
 }

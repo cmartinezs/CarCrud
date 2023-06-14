@@ -32,7 +32,10 @@
 
         let url = "/cars/" + id
         $.get(url, function(json){
-            alert(JSON.stringify(json))
+            $("#plateCode").val(json.car.plateCode)
+            $("#brand").val(json.car.brand)
+            $("#model").val(json.car.model)
+            $("#color").val(json.car.color)
         })
     })
 </script>
