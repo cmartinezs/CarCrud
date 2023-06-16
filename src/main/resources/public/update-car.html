@@ -37,6 +37,34 @@
             $("#model").val(json.car.model)
             $("#color").val(json.car.color)
         })
+
+        let settings = {}
+        settings.headers = {
+            "Accept":"application/json",
+            "Content-Type": "application/json"
+        }
+        $.ajaxSetup(settings)
+
+        $("#save").click(function(){
+            let formData = {}
+            formData.plateCode = $("#plateCode").val()
+            formData.brand = $("#brand").val()
+            formData.model = $("#model").val()
+            formData.color = $("#color").val()
+
+            let data = JSON.stringify(formData)
+
+            let putSettings = {}
+            putSettings.url = url
+            putSettings.type = "PUT"
+            putSettings.data = data
+            putSettings.dataType = "json"
+            putSettings.success = function(json, status, jqxhr){
+                alert(status)
+            }
+
+            $.ajax(putSettings)
+        })
     })
 </script>
 </body>
