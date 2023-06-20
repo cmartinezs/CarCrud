@@ -1,6 +1,6 @@
 package io.cmartinez.carcrud.service;
 
-import io.cmartinez.carcrud.repository.Car;
+import io.cmartinez.carcrud.endpoint.model.Car;
 import io.cmartinez.carcrud.repository.DataBaseCars;
 import java.util.List;
 import org.springframework.stereotype.Service;

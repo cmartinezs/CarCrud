@@ -1,4 +1,4 @@
-package io.cmartinez.carcrud.repository;
+package io.cmartinez.carcrud.endpoint.model;
 
 import lombok.Getter;
 import lombok.Setter;

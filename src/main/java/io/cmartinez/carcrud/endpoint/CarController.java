@@ -1,6 +1,6 @@
 package io.cmartinez.carcrud.endpoint;
 
-import io.cmartinez.carcrud.repository.Car;
+import io.cmartinez.carcrud.endpoint.model.Car;
 import io.cmartinez.carcrud.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package io.cmartinez.carcrud.endpoint;
 
-import io.cmartinez.carcrud.repository.Car;
+import io.cmartinez.carcrud.endpoint.model.Car;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;

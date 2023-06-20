@@ -1,5 +1,6 @@
 package io.cmartinez.carcrud.repository;
 
+import io.cmartinez.carcrud.endpoint.model.Car;
 import java.util.ArrayList;
 import java.util.List;
 
