@@ -1,14 +1,32 @@
 package io.cmartinez.carcrud.service;
 
 import io.cmartinez.carcrud.endpoint.model.Car;
+import io.cmartinez.carcrud.repository.CarRepository;
 import io.cmartinez.carcrud.repository.DataBaseCars;
+import io.cmartinez.carcrud.repository.model.CarEntity;
+import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CarService {
+  @Autowired
+  private CarRepository carRepository;
+
   public List<Car> getAllCars(){
-    return DataBaseCars.getAllCars();
+    List<Car> finalCars = new ArrayList<>();
+    List<CarEntity> cars = (List<CarEntity>)carRepository.findAll();
+    for(CarEntity entity: cars){
+      Car car = new Car();
+      car.setId(entity.getId());
+      car.setPlateCode(entity.getPlateCode());
+      car.setBrand(entity.getBrand());
+      car.setModel(entity.getModel());
+      car.setColor(entity.getColor());
+      finalCars.add(car);
+    }
+    return finalCars;
   }
 
   public Car findCarById(int id){
