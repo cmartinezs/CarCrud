@@ -6,6 +6,8 @@ import io.cmartinez.carcrud.repository.DataBaseCars;
 import io.cmartinez.carcrud.repository.model.CarEntity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,44 +32,59 @@ public class CarService {
   }
 
   public Car findCarById(int id){
-    List<Car> cars = DataBaseCars.getAllCars();
-    for(Car car: cars){
-      if(car.getId() == id){
-        return car;
-      }
+    Optional<CarEntity> foundCar = carRepository.findById(id);
+    boolean isFound = foundCar.isPresent();
+    if(isFound){
+      CarEntity dbCar = foundCar.get();
+      Car car = new Car();
+      car.setId(dbCar.getId());
+      car.setPlateCode(dbCar.getPlateCode());
+      car.setBrand(dbCar.getBrand());
+      car.setModel(dbCar.getModel());
+      car.setColor(dbCar.getColor());
+      return car;
     }
     return null;
   }
 
   public Car deleteCarById(int id) {
-    List<Car> cars = DataBaseCars.getAllCars();
-    for(Car car: cars){
-      if(car.getId() == id){
-        cars.remove(car);
-        return car;
-      }
+    Optional<CarEntity> foundCar = carRepository.findById(id);
+    boolean isFound = foundCar.isPresent();
+    if(isFound){
+      CarEntity dbCar = foundCar.get();
+      Car car = new Car();
+      car.setId(dbCar.getId());
+      car.setPlateCode(dbCar.getPlateCode());
+      car.setBrand(dbCar.getBrand());
+      car.setModel(dbCar.getModel());
+      car.setColor(dbCar.getColor());
+      carRepository.delete(dbCar);
+      return car;
     }
     return null;
   }
 
   public boolean addCar(Car aCar) {
-    List<Car> cars = DataBaseCars.getAllCars();
-    int id = cars.size() + 1;
-    aCar.setId(id);
-    cars.add(aCar);
+    CarEntity newCar = new CarEntity();
+    newCar.setBrand(aCar.getBrand());
+    newCar.setModel(aCar.getModel());
+    newCar.setColor(aCar.getColor());
+    newCar.setPlateCode(aCar.getPlateCode());
+    carRepository.save(newCar);
     return true;
   }
 
   public Car updateCarById(int id, Car aCar) {
-    List<Car> cars = DataBaseCars.getAllCars();
-    for (Car car : cars) {
-      if (car.getId() == id) {
-        car.setBrand(aCar.getBrand());
-        car.setColor(aCar.getColor());
-        car.setModel(aCar.getModel());
-        car.setPlateCode(aCar.getPlateCode());
-        return car;
-      }
+    Optional<CarEntity> foundCar = carRepository.findById(id);
+    boolean isFound = foundCar.isPresent();
+    if(isFound){
+      CarEntity car = foundCar.get();
+      car.setBrand(aCar.getBrand());
+      car.setColor(aCar.getColor());
+      car.setModel(aCar.getModel());
+      car.setPlateCode(aCar.getPlateCode());
+      carRepository.save(car);
+      return aCar;
     }
     return null;
   }
